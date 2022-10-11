@@ -46,3 +46,13 @@ Outputs:
   StateBucket:
     Description: Name of the state bucket
     Value: !Ref StateBucket
+  StateBucketArn:
+    Description: ARN of the state bucket
+    Value: !GetAtt
+      - StateBucket
+      - Arn
+  DynamoDbArn:
+    Description: ARN of the Dynamo Table
+    Value: !GetAtt
+      - LockTable
+      - Arn
