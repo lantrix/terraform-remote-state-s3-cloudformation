@@ -20,7 +20,9 @@ Resources:
             Resource: !Sub "arn:aws:s3:::terraform-state-${AWS::AccountId}/*"
           - Effect: Allow
             Action:
-              - dynamodb:*
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:DeleteItem
             Resource:
               - !Sub "arn:aws:dynamodb:ap-southeast-2:${AWS::AccountId}:table/terraform-state"
 Outputs:
