@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: A managed policy to access the terraform state stack.
+Resources:
+  TerraformStatePolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: A policy to access the terraform remote state
+      ManagedPolicyName: terraform-state-policy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: s3:ListBucket
+            Resource: !Sub "arn:aws:s3:::terraform-state-${AWS::AccountId}"
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+              - s3:PutObject
+              - s3:DeleteObject
+            Resource: !Sub "arn:aws:s3:::terraform-state-${AWS::AccountId}/*"
+          - Effect: Allow
+            Action:
+              - dynamodb:*
+            Resource:
+              - !Sub "arn:aws:dynamodb:ap-southeast-2:${AWS::AccountId}:table/terraform-state"
+Outputs:
+  PolicyARN:
+    Description: The arn PolicyDocument
+    Value: !Ref TerraformStatePolicy

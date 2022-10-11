@@ -1,8 +1,13 @@
 This is a [Terraform remote state](https://www.terraform.io/docs/language/settings/backends/index.html) using AWS [S3 & DynamoDB](https://www.terraform.io/docs/language/settings/backends/s3.html).
 
+## Deploy
+
+- Deploy the cloudformation stack in your region (e.g. `ap-southeast-2`)
+  - Deploy the stack `make deploy`
+  - Deploy a managed policy to attach to IAM roles `make deploy-policy`
+
 ## Usage
 
-- Deploy the cloudformation stack in youre region (e.g. `ap-southeast-2`)
 - Initialise your terraform project to reference the state resources
 
 ```shell
