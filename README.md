@@ -2,9 +2,26 @@ This is a [Terraform remote state](https://www.terraform.io/docs/language/settin
 
 ## Deploy
 
-- Deploy the cloudformation stack in your region (e.g. `ap-southeast-2`)
-  - Deploy the stack `make deploy`
-  - Deploy a managed policy to attach to IAM roles `make deploy-policy`
+- Deploy the cloudformation stack in your region (e.g. `ap-southeast-2`):
+
+```shell
+aws cloudformation deploy \
+		--stack-name terraform-state \
+		--template-file stack.template \
+		--region ap-southeast-2 \
+		--no-fail-on-empty-changeset
+```
+
+- Deploy a managed policy to attach to IAM roles:
+
+```shell
+aws cloudformation deploy \
+		--stack-name terraform-state-managed-policy \
+		--template-file stack-managed-policy.template \
+		--capabilities CAPABILITY_NAMED_IAM \
+		--region ap-southeast-2 \
+		--no-fail-on-empty-changeset
+```
 
 ## Usage
 
