@@ -43,11 +43,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
   backend "s3" {
-    workspace_key_prefix = "my-project"
+    workspace_key_prefix = "my-project" # Prefix used when changing terraform workspaces
+    bucket               = "terraform-state-123456789012" # My S3 state bucket name
+    key                  = "terraform.tfstate" # S3 keyname of actual state file
+    region               = "ap-southeast-2" # Region
+    dynamodb_table       = "terraform-state" # Dynamo table name
   }
 }
 
